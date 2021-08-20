@@ -47,7 +47,10 @@ export default function Slider() {
     useEffect(() => {
         fetch("https://aqueous-gorge-11678.herokuapp.com/")
             .then((res) => res.json())
-            .then((slides) => setSlides(slides));
+            .then((slides) => {
+                if (slides) setSlides(slides);
+                else alert("Something Went Wrong!!");
+            });
     }, []);
 
     return (

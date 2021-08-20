@@ -10,6 +10,7 @@ import Slider from "../components/Slider/Slider";
 import globalStyles from "../styles/globalStyles";
 
 export default function App() {
+    // Extract style from styleSheet
     const { container } = globalStyles;
     return (
         <View style={container}>

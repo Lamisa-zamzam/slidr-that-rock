@@ -33,7 +33,7 @@ const NextButton = ({
         progressRef = useRef(null);
 
     // Handle the animation
-    const animation = (toValue) => {
+    const handleAnimation = (toValue) => {
         return Animated.timing(progressAnimation, {
             toValue,
             duration: 250,
@@ -43,7 +43,7 @@ const NextButton = ({
 
     // Trigger animation function call
     useEffect(() => {
-        animation(percentage);
+        handleAnimation(percentage);
     }, [percentage]);
 
     // Set event listener to progress animation ref
@@ -99,9 +99,11 @@ const NextButton = ({
 
             {/* The button to scroll the slider */}
             <TouchableOpacity
+                // Function call depending on the direction
                 onPress={direction === "next" ? scrollToNext : scrollToPrevious}
                 style={button}
                 activeOpacity={0.6}
+                // disabled if no slides to move in the requested direction
                 disabled={
                     direction === "next"
                         ? currentIndex >= slidesLength - 1
@@ -110,6 +112,7 @@ const NextButton = ({
             >
                 {/* Icon */}
                 <AntDesign
+                    // Icon depending on the direction
                     name={direction === "next" ? "arrowright" : "arrowleft"}
                     size={32}
                     color="#fff"

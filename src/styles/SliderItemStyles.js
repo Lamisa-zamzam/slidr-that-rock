@@ -9,7 +9,6 @@ const sliderItemStyles = StyleSheet.create({
         textAlign: "center",
     },
     sliderImage: {
-        flex: 0.3,
         resizeMode: "cover",
         justifyContent: "center",
     },

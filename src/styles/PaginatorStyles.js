@@ -7,6 +7,7 @@ const paginatorStyles = StyleSheet.create({
         backgroundColor: "#493d8a",
         marginHorizontal: 8,
     },
+    paginatorView: { flexDirection: "row", height: 64 },
 });
 
 export default paginatorStyles;

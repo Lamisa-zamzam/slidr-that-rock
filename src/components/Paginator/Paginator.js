@@ -6,13 +6,13 @@ import paginatorStyles from "../../styles/PaginatorStyles";
 
 const Paginator = ({ data, scrollX }) => {
     // Extract styles from styleSheets
-    const { dot } = paginatorStyles;
+    const { paginatorView, dot } = paginatorStyles;
 
     // Get the width of the window
     const { width } = useWindowDimensions();
 
     return (
-        <View style={{ flexDirection: "row", height: 64 }}>
+        <View style={paginatorView}>
             {data.map((_, i) => {
                 // Set constants for the style of the dots
                 const inputRange = [
