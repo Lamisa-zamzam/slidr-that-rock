@@ -18,7 +18,8 @@ export default function Slider() {
 
     // Initial states of slide index and slides
     const [currentIndex, setCurrentIndex] = useState(0),
-        [slides, setSlides] = useState([]);
+        [slides, setSlides] = useState([]),
+        [value, setValue] = useState("");
 
     // Refs
     const scrollX = useRef(new Animated.Value(0)).current,
@@ -28,64 +29,58 @@ export default function Slider() {
             setCurrentIndex(viewableItems[0].index);
         }).current;
 
-    const [value, setValue] = useState("");
-    // Function to move the slider to the next slide
-    const ScrollToNext = async () => {
-        if (currentIndex <= slides.length - 1) {
-            try {
-                await AsyncStorage.setItem(
-                    "@lastViewedIndex",
-                    (currentIndex + 1).toString()
-                );
-            } catch {
-                alert("Some error occurred!!");
-            }
-        }
-
-        // If there are one or more slides left to go, increment the current index by 1
-        if (currentIndex < slides.length - 1) {
-            slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
-        }
-
-        const value = await AsyncStorage.getItem("@lastViewedIndex");
-        await setValue(value);
-    };
-
-    // Function to move the slider to the previous slide
-    const ScrollToPrevious = async () => {
+    // Sets the index to AsyncStorage
+    const setLastIndexToStorage = async (index) => {
         if (currentIndex >= 0) {
             try {
                 await AsyncStorage.setItem(
                     "@lastViewedIndex",
-                    (currentIndex - 1).toString()
+                    index.toString()
                 );
             } catch {
                 alert("Some error occurred!!");
             }
         }
+    };
 
+    // Function to move the slider to the next slide
+    const ScrollToNext = async () => {
+        // If there are one or more slides left to go, increment the current index by 1
+        if (currentIndex < slides.length - 1) {
+            slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
+        }
+        if (currentIndex >= 0) {
+            setLastIndexToStorage(currentIndex + 1);
+        }
+    };
+
+    // Function to move the slider to the previous slide
+    const ScrollToPrevious = () => {
         // If there are one or more slides left to go back, decrement the current index by 1
         if (currentIndex > 0) {
             slidesRef.current.scrollToIndex({ index: currentIndex - 1 });
         }
-
-        const value = await AsyncStorage.getItem("@lastViewedIndex");
-        await setValue(value);
+        if (currentIndex >= 0) {
+            setLastIndexToStorage(currentIndex - 1);
+        }
     };
 
     // Get the index that was lastly viewed the last time the app closed
-    useEffect(async () => {
-        try {
-            const lastViewedIndex = await AsyncStorage.getItem(
-                "@lastViewedIndex"
-            );
+    useEffect(() => {
+        (async () => {
+            try {
+                const lastViewedIndex = await AsyncStorage.getItem(
+                    "@lastViewedIndex"
+                );
 
-            if (lastViewedIndex) {
-                setValue(parseInt(lastViewedIndex));
+                // If the last viewed index was set
+                if (lastViewedIndex) {
+                    setValue(lastViewedIndex);
+                }
+            } catch (err) {
+                alert("Some error occurred!!");
             }
-        } catch (err) {
-            alert("Some error occurred!!");
-        }
+        })();
     }, []);
 
     // Fetch data from endpoint on server
@@ -97,12 +92,6 @@ export default function Slider() {
                 else alert("Something Went Wrong!!");
             });
     }, [value]);
-
-    const clear = async () => {
-        try {
-            await AsyncStorage.removeItem("@lastViewedIndex");
-        } catch (err) {}
-    };
 
     return (
         <>
@@ -121,6 +110,7 @@ export default function Slider() {
                             )}
                             horizontal
                             showsHorizontalScrollIndicator={false}
+                            initialScrollIndex={parseInt(value)}
                             pagingEnabled
                             bounces={false}
                             keyExtractor={(item) => item.id}
@@ -145,12 +135,7 @@ export default function Slider() {
                     {/* Paginator with dots */}
                     <Paginator data={slides} scrollX={scrollX} />
 
-                    <TouchableOpacity onPress={clear}>
-                        <Text>Press</Text>
-                    </TouchableOpacity>
-
-                    <Text>{currentIndex}</Text>
-                    <Text>{value}</Text>
+                    {/* Scroll Buttons */}
                     <View
                         style={[
                             container,

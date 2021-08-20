@@ -21,4 +21,4 @@ expo start
 -   The server endpoint used to fetch slider data is: https://aqueous-gorge-11678.herokuapp.com/ .\
     This server is made by me for this app and you can find my code here: https://github.com/Lamisa-zamzam/slidr-that-rock-server
 
--   The app persists the last position of the carousel with AsyncStorage, so that when the app closes and opens again, the carousel can be started from the stored position.
+-   The app persists the last position of the carousel with AsyncStorage, and when the app closes and opens again, the carousel starts from the stored position.
