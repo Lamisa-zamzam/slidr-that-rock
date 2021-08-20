@@ -11,6 +11,10 @@ npm i
 expo start
 ```
 
+### Demo Video
+
+[![Slidr That Rock Demo](https://youtu.be/BrQ0CUG-PGg)](hhttps://youtu.be/BrQ0CUG-PGg)
+
 ##### Description
 
 -   This app contains a carousel with 4 blocks.
