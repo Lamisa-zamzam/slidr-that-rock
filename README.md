@@ -11,9 +11,9 @@ npm i
 expo start
 ```
 
-### Demo Video
+### Demo Video : https://www.youtube.com/watch?v=BrQ0CUG-PGg
 
-[![Slidr That Rock Demo](http://img.youtube.com/vi/BrQ0CUG-PGg/0.jpg)](hhttps://youtu.be/BrQ0CUG-PGg)
+[![Slidr That Rock Demo](http://img.youtube.com/vi/BrQ0CUG-PGg/0.jpg)](https://youtu.be/BrQ0CUG-PGg)
 
 ##### Description
 
