@@ -1,12 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, FlatList, Animated, Text } from "react-native";
+import { View, FlatList, Animated, Text } from "react-native";
 
-// import slides from "../../data/Slides.json";
+import sliderStyles from "../../styles/SliderStyles";
+
 import SliderItem from "../SliderItem/SliderItem";
 import Paginator from "../Paginator/Paginator";
 import ScrollButton from "../ScrollButton/ScrollButton";
 
+import globalStyles from "../../styles/globalStyles";
+
 export default function Slider() {
+    const { container } = globalStyles;
+    const { flexView } = sliderStyles;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [slides, setSlides] = useState([]);
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -41,8 +46,8 @@ export default function Slider() {
     return (
         <>
             {slides[0] ? (
-                <View style={styles.container}>
-                    <View style={{ flex: 3 }}>
+                <View style={container}>
+                    <View style={flexView}>
                         <FlatList
                             data={slides}
                             renderItem={({ item }) => (
@@ -96,12 +101,3 @@ export default function Slider() {
         </>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});

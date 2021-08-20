@@ -1,7 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Animated, useWindowDimensions } from "react-native";
+import { View, Animated, useWindowDimensions } from "react-native";
+
+import paginatorStyles from "../../styles/PaginatorStyles";
 
 const Paginator = ({ data, scrollX }) => {
+    const { dot } = paginatorStyles;
     const { width } = useWindowDimensions();
     return (
         <View style={{ flexDirection: "row", height: 64 }}>
@@ -26,7 +29,7 @@ const Paginator = ({ data, scrollX }) => {
 
                 return (
                     <Animated.View
-                        style={[styles.dot, { width: dotWidth, opacity }]}
+                        style={[dot, { width: dotWidth, opacity }]}
                         key={i.toString()}
                     />
                 );
@@ -36,12 +39,3 @@ const Paginator = ({ data, scrollX }) => {
 };
 
 export default Paginator;
-
-const styles = StyleSheet.create({
-    dot: {
-        height: 10,
-        borderRadius: 5,
-        backgroundColor: "#493d8a",
-        marginHorizontal: 8,
-    },
-});

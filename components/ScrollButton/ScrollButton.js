@@ -1,7 +1,10 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Animated, TouchableOpacity, View } from "react-native";
+import { Animated, TouchableOpacity, View } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { AntDesign } from "@expo/vector-icons";
+import scrollButtonStyles from "../../styles/ScrollButtonStyles";
+
+import globalStyles from "../../styles/globalStyles";
 
 const NextButton = ({
     direction,
@@ -11,6 +14,7 @@ const NextButton = ({
     currentIndex,
     slidesLength,
 }) => {
+    const { container } = globalStyles;
     const size = 128;
     const strokeWidth = 2;
     const center = size / 2;
@@ -51,8 +55,10 @@ const NextButton = ({
         };
     }, []);
 
+    const { button } = scrollButtonStyles;
+
     return (
-        <View style={styles.container}>
+        <View style={container}>
             <Svg width={size} height={size}>
                 <G rotation="-90" origin={center}>
                     <Circle
@@ -75,7 +81,7 @@ const NextButton = ({
             </Svg>
             <TouchableOpacity
                 onPress={direction === "next" ? scrollToNext : scrollToPrevious}
-                style={styles.button}
+                style={button}
                 activeOpacity={0.6}
                 disabled={
                     direction === "next"
@@ -94,18 +100,3 @@ const NextButton = ({
 };
 
 export default NextButton;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    button: {
-        position: "absolute",
-        backgroundColor: "#f4338f",
-        borderRadius: 100,
-        padding: 20,
-    },
-});
