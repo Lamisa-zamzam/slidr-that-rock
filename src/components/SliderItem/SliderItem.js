@@ -8,7 +8,7 @@ import sliderItemStyle from "../../styles/SliderItemStyles";
 const SliderItem = ({ item }) => {
     // Extract styles from styleSheets
     const { container } = globalStyles,
-        { title, sliderImage, flexViewOneThird } = sliderItemStyle;
+        { title, sliderImage, flexViewHalf: flexViewHalf } = sliderItemStyle;
 
     // Get window width and height
     const { width, height } = useWindowDimensions();
@@ -28,11 +28,16 @@ const SliderItem = ({ item }) => {
             {/* Slider Image */}
             <Image
                 source={{ uri: item.images[randomSlideIndex] }}
-                style={[sliderImage, flexViewOneThird, { width, height }]}
+                style={[
+                    sliderImage,
+                    flexViewHalf,
+                    { flex: 0.2 },
+                    { width, height },
+                ]}
             />
 
             {/* Slider Title */}
-            <View style={flexViewOneThird}>
+            <View style={flexViewHalf}>
                 <Text style={title}>{item.title}</Text>
             </View>
         </View>

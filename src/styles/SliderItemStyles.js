@@ -12,7 +12,7 @@ const sliderItemStyles = StyleSheet.create({
         resizeMode: "cover",
         justifyContent: "center",
     },
-    flexViewOneThird: { flex: 0.3 },
+    flexViewHalf: { flex: 0.5 },
 });
 
 export default sliderItemStyles;
