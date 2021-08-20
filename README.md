@@ -11,6 +11,8 @@ npm i
 expo start
 ```
 
+##### Description
+
 -   This app contains a carousel with 4 blocks.
 -   For each block, there is an image selected randomly from the multiple images fetched from the server endpoint and the title of that block.
 -   Navigation is made with next and previous buttons and also with scrolling by touch.
