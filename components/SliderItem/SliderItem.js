@@ -7,15 +7,21 @@ import {
     useWindowDimensions,
 } from "react-native";
 
-const url =
-    "https://tse3.mm.bing.net/th?id=OIP.Pz41etqzp1j7tlMIA-zJ0gAAAA&pid=Api&P=0&w=300&h=300";
-
 const SliderItem = ({ item }) => {
     const { width, height } = useWindowDimensions();
+
+    const generateRandomSlideIndex = (min, max) =>
+        Math.round(Math.random() * (max - min) + min);
+
+    const randomSlideIndex = generateRandomSlideIndex(
+        item.images.length - 1,
+        0
+    );
+
     return (
-        <View style={[styles.container, { width }]}>
+        <View style={[styles.container, { width, height }]}>
             <Image
-                source={{ uri: item.images[0] }}
+                source={{ uri: item.images[randomSlideIndex] }}
                 style={{
                     width,
                     height,
@@ -25,9 +31,9 @@ const SliderItem = ({ item }) => {
                 }}
             />
 
-            {/* <View style={{ flex: 0.3 }}>
+            <View style={{ flex: 0.3 }}>
                 <Text style={styles.title}>{item.title}</Text>
-            </View> */}
+            </View>
         </View>
     );
 };

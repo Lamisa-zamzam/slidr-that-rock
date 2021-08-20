@@ -1,11 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import {
-    StyleSheet,
-    Animated,
-    TouchableOpacity,
-    View,
-    Text,
-} from "react-native";
+import { StyleSheet, Animated, TouchableOpacity, View } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { AntDesign } from "@expo/vector-icons";
 
