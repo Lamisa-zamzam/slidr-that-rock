@@ -1,10 +1,13 @@
 import React, { useRef, useEffect } from "react";
 import { Animated, TouchableOpacity, View } from "react-native";
+
+// SVG and icons
 import Svg, { G, Circle } from "react-native-svg";
 import { AntDesign } from "@expo/vector-icons";
-import scrollButtonStyles from "../../styles/ScrollButtonStyles";
 
+// StyleSheets
 import globalStyles from "../../styles/globalStyles";
+import scrollButtonStyles from "../../styles/ScrollButtonStyles";
 
 const NextButton = ({
     direction,
@@ -14,16 +17,22 @@ const NextButton = ({
     currentIndex,
     slidesLength,
 }) => {
-    const { container } = globalStyles;
-    const size = 128;
-    const strokeWidth = 2;
-    const center = size / 2;
-    const radius = size / 2 - strokeWidth / 2;
-    const circumference = 2 * Math.PI * radius;
+    // Extract style from styleSheets
+    const { container } = globalStyles,
+        { button } = scrollButtonStyles;
 
-    const progressAnimation = useRef(new Animated.Value(0)).current;
-    const progressRef = useRef(null);
+    // Declare constants for the Circle SVGs
+    const size = 128,
+        strokeWidth = 2,
+        center = size / 2,
+        radius = size / 2 - strokeWidth / 2,
+        circumference = 2 * Math.PI * radius;
 
+    // Refs
+    const progressAnimation = useRef(new Animated.Value(0)).current,
+        progressRef = useRef(null);
+
+    // Handle the animation
     const animation = (toValue) => {
         return Animated.timing(progressAnimation, {
             toValue,
@@ -32,16 +41,21 @@ const NextButton = ({
         }).start();
     };
 
+    // Trigger animation function call
     useEffect(() => {
         animation(percentage);
     }, [percentage]);
 
+    // Set event listener to progress animation ref
     useEffect(() => {
         progressAnimation.addListener(
             (value) => {
+                // Set what the stroke width will be
                 const strokeDashoffset =
                     circumference - (circumference * value.value) / 100;
-                if (progressRef?.current !== null) {
+
+                // If progressRef is initiated, set the stroke
+                if (progressRef?.current) {
                     progressRef.current.setNativeProps({
                         strokeDashoffset,
                     });
@@ -50,17 +64,18 @@ const NextButton = ({
             [percentage]
         );
 
+        // Do the cleanup -- on component unmount
         return () => {
             progressAnimation.removeAllListeners();
         };
     }, []);
 
-    const { button } = scrollButtonStyles;
-
     return (
         <View style={container}>
             <Svg width={size} height={size}>
+                {/* Rotate the Circles to get the expected output */}
                 <G rotation="-90" origin={center}>
+                    {/* The gray circle */}
                     <Circle
                         stroke="#E6E7E8"
                         cx={center}
@@ -68,6 +83,8 @@ const NextButton = ({
                         r={radius}
                         strokeWidth={strokeWidth}
                     />
+
+                    {/* The animated pink circle */}
                     <Circle
                         ref={progressRef}
                         stroke="#F4338F"
@@ -79,6 +96,8 @@ const NextButton = ({
                     />
                 </G>
             </Svg>
+
+            {/* The button to scroll the slider */}
             <TouchableOpacity
                 onPress={direction === "next" ? scrollToNext : scrollToPrevious}
                 style={button}
@@ -89,6 +108,7 @@ const NextButton = ({
                         : currentIndex <= 0
                 }
             >
+                {/* Icon */}
                 <AntDesign
                     name={direction === "next" ? "arrowright" : "arrowleft"}
                     size={32}
