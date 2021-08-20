@@ -13,13 +13,11 @@ expo start
 
 <br/>
 <br/>
-<br/>
 
 ### Demo Video : https://youtu.be/BrQ0CUG-PGg
 
 [![Slidr That Rock Demo](http://img.youtube.com/vi/BrQ0CUG-PGg/0.jpg)](https://youtu.be/BrQ0CUG-PGg)
 
-<br/>
 <br/>
 <br/>
 
