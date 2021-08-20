@@ -5,12 +5,10 @@
 To run the app locally -
 
 ```
-
 git clone https://github.com/Lamisa-zamzam/slidr-that-rock
 cd slidr-that-rock
 npm i
 expo start
-
 ```
 
 -   This app contains a carousel with 4 blocks.
