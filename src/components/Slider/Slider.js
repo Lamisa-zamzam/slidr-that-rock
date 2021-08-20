@@ -1,12 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-    View,
-    FlatList,
-    Animated,
-    Text,
-    ActivityIndicator,
-    TouchableOpacity,
-} from "react-native";
+import { View, FlatList, Animated, Text, TouchableOpacity } from "react-native";
 
 // Components
 import SliderItem from "../SliderItem/SliderItem";
@@ -26,8 +19,6 @@ export default function Slider() {
     // Initial states of slide index and slides
     const [currentIndex, setCurrentIndex] = useState(0),
         [slides, setSlides] = useState([]);
-
-    const [loading, setLoading] = useState(false);
 
     // Refs
     const scrollX = useRef(new Animated.Value(0)).current,
@@ -116,7 +107,7 @@ export default function Slider() {
     return (
         <>
             {/* Show the slider after the data is loaded from the server */}
-            {slides[0] && !loading ? (
+            {slides[0] ? (
                 <View style={container}>
                     <View style={flexView}>
                         {/* Slider */}
@@ -189,7 +180,7 @@ export default function Slider() {
                 </View>
             ) : (
                 // Show when the data loads from the server
-                <ActivityIndicator size="large" />
+                <Text>Loading...</Text>
             )}
         </>
     );

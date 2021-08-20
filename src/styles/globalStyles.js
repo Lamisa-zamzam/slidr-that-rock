@@ -7,6 +7,13 @@ const globalStyles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    brandName: {
+        marginTop: 20,
+        paddingVertical: 30,
+        paddingHorizontal: 10,
+        color: "#f4338f",
+        fontSize: 20,
+    },
 });
 
 export default globalStyles;

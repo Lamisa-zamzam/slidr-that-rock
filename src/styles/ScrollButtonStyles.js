@@ -5,7 +5,7 @@ const scrollButtonStyles = StyleSheet.create({
         position: "absolute",
         backgroundColor: "#f4338f",
         borderRadius: 100,
-        padding: 20,
+        padding: 10,
     },
 });
 

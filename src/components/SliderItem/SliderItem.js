@@ -8,10 +8,10 @@ import sliderItemStyle from "../../styles/SliderItemStyles";
 const SliderItem = ({ item }) => {
     // Extract styles from styleSheets
     const { container } = globalStyles,
-        { title, sliderImage, flexViewHalf: flexViewHalf } = sliderItemStyle;
+        { title, sliderImage, flexViewHalf, sliderItem } = sliderItemStyle;
 
     // Get window width and height
-    const { width, height } = useWindowDimensions();
+    const { width } = useWindowDimensions();
 
     // Generate a random index to choose from the images of the slide
     const generateRandomSlideIndex = (min, max) =>
@@ -24,16 +24,11 @@ const SliderItem = ({ item }) => {
     );
 
     return (
-        <View style={[container, { width, height }]}>
+        <View style={[container, sliderItem, { width }]}>
             {/* Slider Image */}
             <Image
                 source={{ uri: item.images[randomSlideIndex] }}
-                style={[
-                    sliderImage,
-                    flexViewHalf,
-                    { flex: 0.2 },
-                    { width, height },
-                ]}
+                style={[sliderImage, { width }]}
             />
 
             {/* Slider Title */}

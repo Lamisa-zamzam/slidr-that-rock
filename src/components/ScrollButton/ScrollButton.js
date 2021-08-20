@@ -22,11 +22,17 @@ const NextButton = ({
         { button } = scrollButtonStyles;
 
     // Declare constants for the Circle SVGs
-    const size = 128,
+    const size = 100,
         strokeWidth = 2,
         center = size / 2,
         radius = size / 2 - strokeWidth / 2,
         circumference = 2 * Math.PI * radius;
+
+    // If the touchable opacity should be disabled
+    const ifDisabled =
+        direction === "next"
+            ? currentIndex >= slidesLength - 1
+            : currentIndex <= 0;
 
     // Refs
     const progressAnimation = useRef(new Animated.Value(0)).current,
@@ -101,14 +107,10 @@ const NextButton = ({
             <TouchableOpacity
                 // Function call depending on the direction
                 onPress={direction === "next" ? scrollToNext : scrollToPrevious}
-                style={button}
+                style={[button, ifDisabled && { backgroundColor: "gray" }]}
                 activeOpacity={0.6}
                 // disabled if no slides to move in the requested direction
-                disabled={
-                    direction === "next"
-                        ? currentIndex >= slidesLength - 1
-                        : currentIndex <= 0
-                }
+                disabled={ifDisabled}
             >
                 {/* Icon */}
                 <AntDesign
