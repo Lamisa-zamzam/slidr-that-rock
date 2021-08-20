@@ -13,7 +13,7 @@ expo start
 
 ### Demo Video
 
-[![Slidr That Rock Demo](https://youtu.be/BrQ0CUG-PGg)](hhttps://youtu.be/BrQ0CUG-PGg)
+[![Slidr That Rock Demo](http://img.youtube.com/vi/BrQ0CUG-PGg/0.jpg)](hhttps://youtu.be/BrQ0CUG-PGg)
 
 ##### Description
 
